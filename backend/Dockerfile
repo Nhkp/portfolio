@@ -10,12 +10,12 @@ RUN curl -LsSf https://astral.sh/uv/install.sh | sh
 
 ENV PATH="/root/.local/bin:$PATH"
 
-COPY pyproject.toml uv.lock* ./
+COPY ./backend/pyproject.toml ./backend/uv.lock* ./
 
 RUN uv sync --frozen --no-dev
 
-COPY backend ./backend
+COPY ./backend ./
 
 EXPOSE 8000
 
-CMD ["uv", "run", "uvicorn", "backend.main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
+CMD ["uv", "run", "uvicorn", "backend.main:app", "--host", "0.0.0.0", "--port", "8000"]
