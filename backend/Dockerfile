@@ -1,20 +1,22 @@
-FROM python:3.11-slim
+FROM python:3.11-slim-bookworm
 
 WORKDIR /app
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    curl ca-certificates && \
-    rm -rf /var/lib/apt/lists/*
+    ca-certificates \
+    curl \
+    libpq-dev \
+    build-essential \
+ && rm -rf /var/lib/apt/lists/*
 
-RUN curl -LsSf https://astral.sh/uv/install.sh | sh
-
-ENV PATH="/root/.local/bin:$PATH"
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
 
 COPY ./backend/pyproject.toml ./backend/uv.lock* ./
 
 RUN uv sync --frozen --no-dev
 
 COPY ./backend ./
+COPY ./data /app/data/
 
 EXPOSE 8000
 
