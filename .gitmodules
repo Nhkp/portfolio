@@ -1,3 +1,6 @@
 [submodule "frontend"]
 	path = frontend
 	url = git@github.com:Nhkp/personal-code-nest.git
+[submodule "backend"]
+	path = backend
+	url = git@github.com:Nhkp/portfolio-backend.git
