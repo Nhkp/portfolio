@@ -31,8 +31,8 @@ services:
     env_file:
       - .env
     environment:
-      - DATABASE_URL=postgresql://user:password@db:5432/postgres_db
-    command: uv run uvicorn main:app --host 0.0.0.0 --port 8000
+      - DATABASE_URL=${DATABASE_URL}
+    command: uv run uvicorn backend.main:app --host 0.0.0.0 --port 8000
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8000/docs"]
       interval: 30s
