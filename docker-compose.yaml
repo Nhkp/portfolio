@@ -32,9 +32,9 @@ services:
       - .env
     environment:
       - DATABASE_URL=${DATABASE_URL}
-    command: uv run uvicorn backend.main:app --host 0.0.0.0 --port 8000
+    command: uv run uvicorn main:app --host 0.0.0.0 --port 8000
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8000/docs"]
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
       interval: 30s
       timeout: 10s
       retries: 5
